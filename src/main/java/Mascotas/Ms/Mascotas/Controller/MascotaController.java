@@ -1,7 +1,8 @@
-package cl.sanosysalvo.ms_mascotas.MascotaController; // Ajustado al nombre de tu carpeta
+package Mascotas.Ms.Mascotas.Controller; 
 
-import cl.sanosysalvo.ms_mascotas.model.Mascota;
-import cl.sanosysalvo.ms_mascotas.service.IMascotaService;
+import Mascotas.Ms.Mascotas.Model.Mascota;
+import Mascotas.Ms.Mascotas.Service.IMascotaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,20 +14,20 @@ import java.util.List;
 public class MascotaController {
 
     @Autowired
-    private IMascotaService service;
+    private IMascotaService Service;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Mascota>> listar() {
-        return ResponseEntity.ok(service.obtenerTodas());
+        return ResponseEntity.ok(Service.obtenerTodas());
     }
 
     @PostMapping("/crear")
     public ResponseEntity<Mascota> crear(@RequestBody Mascota mascota) {
-        return ResponseEntity.ok(service.guardar(mascota));
+        return ResponseEntity.ok(Service.guardar(mascota));
     }
 
     @GetMapping("/dueno/{id}")
     public ResponseEntity<List<Mascota>> porDueno(@PathVariable Long id) {
-        return ResponseEntity.ok(service.obtenerPorDueno(id));
+        return ResponseEntity.ok(Service.obtenerPorDueño(id));
     }
 }
