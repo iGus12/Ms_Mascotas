@@ -26,8 +26,8 @@ public class MascotaController {
         return ResponseEntity.ok(Service.guardar(mascota));
     }
 
-    @GetMapping("/dueno/{id}")
-    public ResponseEntity<List<Mascota>> porDueno(@PathVariable Long id) {
+    @GetMapping("/dueño/{id}")
+    public ResponseEntity<List<Mascota>> porDueño(@PathVariable Long id) {
         return ResponseEntity.ok(Service.obtenerPorDueño(id));
     }
 }

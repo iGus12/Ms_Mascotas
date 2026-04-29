@@ -16,7 +16,7 @@ public class Mascota {
     private String especie;
     private String raza;
     private Integer edad;
-    private Long duenoId;
+    private Long dueñoId;
     private String vacunas;
 
     

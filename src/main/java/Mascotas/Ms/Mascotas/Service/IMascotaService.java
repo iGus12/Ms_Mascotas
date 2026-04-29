@@ -6,5 +6,5 @@ import java.util.List;
 public interface IMascotaService {
     List<Mascota> obtenerTodas();
     Mascota guardar(Mascota mascota);
-    List<Mascota> obtenerPorDueño(Long duenoId);
+    List<Mascota> obtenerPorDueño(Long dueñoId);
 }
