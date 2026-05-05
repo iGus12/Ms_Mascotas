@@ -18,6 +18,7 @@ public class Mascota {
     private Integer edad;
     private Long dueñoId;
     private String vacunas;
+    private String estadoReporte;
 
     
 }
