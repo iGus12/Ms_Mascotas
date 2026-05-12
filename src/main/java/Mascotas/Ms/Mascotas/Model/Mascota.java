@@ -19,6 +19,10 @@ public class Mascota {
     private Long dueñoId;
     private String vacunas;
     private String estadoReporte;
+    private String color;
+    private String ubicacion;
+    private String contacto;
+    private String descripcion;
 
     
 }

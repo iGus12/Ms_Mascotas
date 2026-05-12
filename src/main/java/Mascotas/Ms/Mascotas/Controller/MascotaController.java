@@ -37,10 +37,10 @@ public class MascotaController {
             @RequestBody Mascota mascota, 
             @RequestParam(required = false) String tipo) {
         
-        // 1. Pasamos los datos por tu Fábrica manual y estricta
+      
         Mascota mascotaProcesada = MascotaFactory.crearReporte(tipo, mascota);
         
-        // 2. Guardamos la mascota usando tu variable "Service"
+        
         return ResponseEntity.ok(Service.guardar(mascotaProcesada));
     }
 }
