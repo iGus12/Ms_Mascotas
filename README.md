@@ -1,4 +1,3 @@
-# Ms_Mascotas
 #  Ms_Mascotas - Sanos y Salvos
 
 Microservicio encargado de la gestión centralizada de mascotas para el sistema **Sanos y Salvos**. Este componente maneja la persistencia y la lógica de negocio relacionada con el registro de animales, reportes de mascotas perdidas y encontradas, y su historial de salud.
