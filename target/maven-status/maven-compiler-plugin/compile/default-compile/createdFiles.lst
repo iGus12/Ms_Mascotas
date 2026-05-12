@@ -1,0 +1,7 @@
+Mascotas\Ms\Mascotas\Service\IMascotaService.class
+Mascotas\Ms\Mascotas\Service\MascotaServiceImpl.class
+Mascotas\Ms\Mascotas\Repositorio\MascotaRepositorio.class
+Mascotas\Ms\Mascotas\Controller\MascotaController.class
+Mascotas\Ms\Mascotas\Factory\MascotaFactory.class
+Mascotas\Ms\Mascotas\Application.class
+Mascotas\Ms\Mascotas\Model\Mascota.class
