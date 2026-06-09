@@ -18,6 +18,16 @@ public class MascotaServiceImpl implements IMascotaService {
     }
 
     @Override
+    public long contarTodas() {
+        return repositorio.count();
+    }
+
+    @Override
+    public long contarPorEstado(String estado) {
+        return repositorio.countByEstado(estado);
+    }
+
+    @Override
     public Mascota guardar(Mascota mascota) {
         return repositorio.save(mascota);
     }

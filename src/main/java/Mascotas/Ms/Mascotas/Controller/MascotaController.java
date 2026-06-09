@@ -37,10 +37,22 @@ public class MascotaController {
             @RequestBody Mascota mascota, 
             @RequestParam(required = false) String tipo) {
         
-      
         Mascota mascotaProcesada = MascotaFactory.crearReporte(tipo, mascota);
-        
-        
         return ResponseEntity.ok(Service.guardar(mascotaProcesada));
+    }
+
+
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> contarMascotas(@RequestParam(required = false) String estado) {
+        if (estado != null && !estado.isEmpty()) {
+            return ResponseEntity.ok(Service.contarPorEstado(estado));
+        }
+        return ResponseEntity.ok(Service.contarTodas());
+    }
+
+    @GetMapping("/ultimos")
+    public ResponseEntity<List<Mascota>> obtenerUltimos() {
+        return ResponseEntity.ok(Service.obtenerTodas());
     }
 }

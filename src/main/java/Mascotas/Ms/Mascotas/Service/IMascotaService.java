@@ -7,4 +7,7 @@ public interface IMascotaService {
     List<Mascota> obtenerTodas();
     Mascota guardar(Mascota mascota);
     List<Mascota> obtenerPorDueño(Long dueñoId);
+
+    long contarTodas();
+    long contarPorEstado(String estado);
 }
