@@ -16,14 +16,17 @@ public class Mascota {
     private String especie;
     private String raza;
     private Integer edad;
+
+    @Column(name = "dueño_id") 
     private Long dueñoId;
+
     private String vacunas;
+
+    @Column(name = "estado_reporte") 
     private String estadoReporte;
+
     private String color;
     private String ubicacion;
     private String contacto;
     private String descripcion;
-
-    
 }
-

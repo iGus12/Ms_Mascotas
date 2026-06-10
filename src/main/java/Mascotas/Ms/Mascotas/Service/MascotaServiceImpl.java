@@ -17,15 +17,17 @@ public class MascotaServiceImpl implements IMascotaService {
         return repositorio.findAll();
     }
 
-    @Override
-    public long contarTodas() {
-        return repositorio.count();
-    }
+ @Override
+public long contarTodas() {
+    // Cuenta el total de filas reales en la tabla de MySQL
+    return repositorio.count();
+}
 
-    @Override
-    public long contarPorEstado(String estado) {
-        return repositorio.countByEstado(estado);
-    }
+@Override
+public long contarPorEstado(String estado) {
+    // Petición real filtrada a la base de datos
+    return repositorio.countByEstadoReal(estado);
+}
 
     @Override
     public Mascota guardar(Mascota mascota) {
