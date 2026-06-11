@@ -16,6 +16,9 @@ public class Mascota {
     private String especie;
     private String raza;
     private Integer edad;
+    private String fecha;
+    @Column(columnDefinition = "LONGTEXT")
+    private String foto;
 
     @Column(name = "dueño_id") 
     private Long dueñoId;

@@ -24,7 +24,6 @@ public class MascotaController {
     @Autowired
     private MascotaRepositorio mascotaRepositorio; 
 
-   
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -64,36 +63,52 @@ public class MascotaController {
     public ResponseEntity<List<Mascota>> obtenerUltimos() {
         return ResponseEntity.ok(Service.obtenerTodas());
     }
+    
+    
     @PostMapping("/crear-admin")
-    public ResponseEntity<?> crearMascotaNativo(@RequestBody Map<String, Object> datos) {
+    public ResponseEntity<?> crearMascotaAdmin(@RequestBody Map<String, Object> datosNuevos) {
         try {
-            // Forzamos dueño_id = 1 para que MySQL no rechace la fila
-            String sql = "INSERT INTO mascotas (nombre, especie, ubicacion, estado_reporte, dueño_id) VALUES (?, ?, ?, ?, 1)";
+            String sql = "INSERT INTO mascotas (nombre, especie, raza, color, edad, contacto, ubicacion, estado_reporte, descripcion, reproductivo, foto, fecha, dueño_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
             jdbcTemplate.update(sql, 
-                datos.get("nombre"), 
-                datos.get("especie"), 
-                datos.get("ubicacion"), 
-                datos.get("estadoReporte")
+                datosNuevos.get("nombre"), 
+                datosNuevos.get("especie"), 
+                datosNuevos.get("raza"),           
+                datosNuevos.get("color"),          
+                datosNuevos.get("edad"),           
+                datosNuevos.get("contacto"),       
+                datosNuevos.get("ubicacion"), 
+                datosNuevos.get("estadoReporte"), 
+                datosNuevos.get("descripcion"),    
+                datosNuevos.get("reproductivo"), 
+                datosNuevos.get("foto"),
+                datosNuevos.get("fecha")
             );
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(Map.of("mensaje", "¡Mascota registrada con éxito total!"));
         } catch (Exception e) {
-            System.out.println("❌ Error en SQL INSERT nativo: " + e.getMessage());
-            return ResponseEntity.status(500).body("Error SQL: " + e.getMessage());
+            System.out.println("❌ Error en Java al guardar: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error al guardar en BD: " + e.getMessage());
         }
     }
 
-  
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizarMascotaAdmin(@PathVariable Long id, @RequestBody Map<String, Object> datosNuevos) {
         try {
-            String sql = "UPDATE mascotas SET nombre = ?, especie = ?, ubicacion = ?, estado_reporte = ? WHERE id = ?";
+            String sql = "UPDATE mascotas SET nombre = ?, especie = ?, raza = ?, color = ?, edad = ?, contacto = ?, ubicacion = ?, estado_reporte = ?, descripcion = ?, fecha = ? WHERE id = ?";
+            
             int filas = jdbcTemplate.update(sql, 
                 datosNuevos.get("nombre"), 
                 datosNuevos.get("especie"), 
+                datosNuevos.get("raza"),          
+                datosNuevos.get("color"),         
+                datosNuevos.get("edad"),        
+                datosNuevos.get("contacto"),    
                 datosNuevos.get("ubicacion"), 
                 datosNuevos.get("estadoReporte"), 
+                datosNuevos.get("descripcion"),   
+                datosNuevos.get("fecha"),
                 id
             );
+            
             if (filas > 0) return ResponseEntity.ok().build();
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
@@ -102,6 +117,8 @@ public class MascotaController {
         }
     }
     
+   
+   
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarMascotaAdmin(@PathVariable Long id) {
         try {
@@ -110,7 +127,7 @@ public class MascotaController {
             if (filas > 0) return ResponseEntity.ok().build();
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
-            System.out.println("❌ Error en SQL DELETE nativo: " + e.getMessage());
+            System.out.println(" Error en SQL DELETE nativo: " + e.getMessage());
             return ResponseEntity.status(500).body("Error SQL: " + e.getMessage());
         }
     }
