@@ -69,9 +69,7 @@ public class MascotaServiceImpltest {
         assertTrue(resultado.isEmpty());
     }
 
-    // ==========================================
-    // PRUEBAS PARA: guardar()
-    // ==========================================
+    
 
     @Test
     public void deberiaGuardarMascota_Exitosamente() {
@@ -90,9 +88,7 @@ public class MascotaServiceImpltest {
         verify(repositorio, times(1)).save(nuevaMascota);
     }
 
-    // ==========================================
-    // PRUEBAS PARA: obtenerPorDueño()
-    // ==========================================
+ 
 
     @Test
     public void deberiaRetornarMascotasDelDueño_CuandoDueñoTieneMascotas() {
@@ -109,9 +105,7 @@ public class MascotaServiceImpltest {
         assertEquals(dueñoId, resultado.get(0).getDueñoId());
     }
 
-    // ==========================================
-    // PRUEBAS PARA LOS CONTADORES
-    // ==========================================
+   
 
     @Test
     public void deberiaRetornarTotalDeMascotas() {
