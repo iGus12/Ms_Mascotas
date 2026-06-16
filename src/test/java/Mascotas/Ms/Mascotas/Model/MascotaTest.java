@@ -8,9 +8,6 @@ import org.junit.jupiter.api.Test;
 
 class MascotaTest {
 
-    // ==========================================
-    // PRUEBA 1: Verificar que el objeto se crea bien
-    // ==========================================
     @Test
     void deberiaCrearMascotaVacia() {
         // Act: Instanciamos el modelo
@@ -20,15 +17,13 @@ class MascotaTest {
         assertNotNull(mascota, "El objeto mascota no debería ser nulo al instanciarse");
     }
 
-    // ==========================================
-    // PRUEBA 2: Verificar el funcionamiento de Getters y Setters
-    // ==========================================
+
     @Test
     void deberiaAsignarYObtenerDatosDeMascota() {
-        // Arrange: Preparamos los datos reales de Rocco
+       
         Mascota mascota = new Mascota();
 
-        // Act: Asignamos todos los datos (Setters)
+       
         mascota.setId(37L);
         mascota.setNombre("Rocco");
         mascota.setEspecie("Perro");
@@ -38,7 +33,7 @@ class MascotaTest {
         mascota.setVacunas("Al día");
         mascota.setEstadoReporte("REGISTRO NORMAL");
 
-        // Assert: Validamos que coincida con lo que tu microservicio espera
+        
         assertAll("Verificando propiedades exactas de la mascota en el modelo",
             () -> assertEquals(37L, mascota.getId(), "El ID no coincide con el de Rocco"),
             () -> assertEquals("Rocco", mascota.getNombre(), "El nombre no coincide"),

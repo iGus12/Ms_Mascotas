@@ -26,71 +26,74 @@ public class MascotaServiceImpltest {
     @InjectMocks
     private MascotaServiceImpl mascotaService;
 
-  
+
     private Mascota mascotaRocco;
 
     @BeforeEach
     void setUp() {
-       
+        
         mascotaRocco = new Mascota();
         mascotaRocco.setId(37L);
         mascotaRocco.setNombre("Rocco");
         mascotaRocco.setEspecie("Perro");
-        mascotaRocco.setEstadoReporte("EN REFUGIO: MASCOTA ENCONTRADA");
-        mascotaRocco.setDueñoId(1L);
+        mascotaRocco.setRaza("Labrador");
+        mascotaRocco.setEdad(5);
+        mascotaRocco.setDueñoId(10L);
+        mascotaRocco.setVacunas("Al día");
+        mascotaRocco.setEstadoReporte("REGISTRO NORMAL");
     }
 
-
+   
     @Test
     public void deberiaRetornarListaDeMascotas_CuandoExistenMascotas() {
-        
+        // Arrange
         when(repositorio.findAll()).thenReturn(Arrays.asList(mascotaRocco));
 
+        // Act
         List<Mascota> resultado = mascotaService.obtenerTodas();
 
+        // Assert
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
         assertEquals("Rocco", resultado.get(0).getNombre());
         verify(repositorio, times(1)).findAll();
     }
 
+
     @Test
     public void deberiaRetornarListaVacia_CuandoNoHayMascotas() {
-      
+        // Arrange
         when(repositorio.findAll()).thenReturn(Collections.emptyList());
 
-     
+        // Act
         List<Mascota> resultado = mascotaService.obtenerTodas();
 
+        // Assert
         assertNotNull(resultado);
         assertTrue(resultado.isEmpty());
     }
 
-    
-
+ 
     @Test
     public void deberiaGuardarMascota_Exitosamente() {
-        // Arrange
-        Mascota nuevaMascota = new Mascota();
-        nuevaMascota.setNombre("Alfred");
-        
+        // Arrange: 
         when(repositorio.save(any(Mascota.class))).thenReturn(mascotaRocco);
 
         // Act
-        Mascota resultado = mascotaService.guardar(nuevaMascota);
+        Mascota resultado = mascotaService.guardar(mascotaRocco);
 
         // Assert
         assertNotNull(resultado);
         assertEquals(37L, resultado.getId());
-        verify(repositorio, times(1)).save(nuevaMascota);
+        assertEquals("Rocco", resultado.getNombre());
+        verify(repositorio, times(1)).save(mascotaRocco);
     }
 
  
-
     @Test
     public void deberiaRetornarMascotasDelDueño_CuandoDueñoTieneMascotas() {
-        // Arrange
-        Long dueñoId = 1L;
+        // Arrange: 
+        Long dueñoId = 10L;
         when(repositorio.findByDueñoId(dueñoId)).thenReturn(Arrays.asList(mascotaRocco));
 
         // Act
@@ -101,8 +104,6 @@ public class MascotaServiceImpltest {
         assertFalse(resultado.isEmpty());
         assertEquals(dueñoId, resultado.get(0).getDueñoId());
     }
-
-   
 
     @Test
     public void deberiaRetornarTotalDeMascotas() {
@@ -116,6 +117,7 @@ public class MascotaServiceImpltest {
         assertEquals(15L, total);
         verify(repositorio, times(1)).count();
     }
+
 
     @Test
     public void deberiaRetornarConteoPorEstado() {
