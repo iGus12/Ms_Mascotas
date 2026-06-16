@@ -26,12 +26,12 @@ public class MascotaServiceImpltest {
     @InjectMocks
     private MascotaServiceImpl mascotaService;
 
-    // Objeto de prueba que reutilizaremos
+  
     private Mascota mascotaRocco;
 
     @BeforeEach
     void setUp() {
-        // Esto se ejecuta antes de cada prueba para tener datos limpios
+       
         mascotaRocco = new Mascota();
         mascotaRocco.setId(37L);
         mascotaRocco.setNombre("Rocco");
@@ -43,13 +43,11 @@ public class MascotaServiceImpltest {
 
     @Test
     public void deberiaRetornarListaDeMascotas_CuandoExistenMascotas() {
-        // Arrange
+        
         when(repositorio.findAll()).thenReturn(Arrays.asList(mascotaRocco));
 
-        // Act
         List<Mascota> resultado = mascotaService.obtenerTodas();
 
-        // Assert
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
         assertEquals("Rocco", resultado.get(0).getNombre());
@@ -58,13 +56,12 @@ public class MascotaServiceImpltest {
 
     @Test
     public void deberiaRetornarListaVacia_CuandoNoHayMascotas() {
-        // Arrange (Camino Límite: BD vacía)
+      
         when(repositorio.findAll()).thenReturn(Collections.emptyList());
 
-        // Act
+     
         List<Mascota> resultado = mascotaService.obtenerTodas();
 
-        // Assert
         assertNotNull(resultado);
         assertTrue(resultado.isEmpty());
     }
