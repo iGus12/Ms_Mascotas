@@ -24,17 +24,15 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-// 🔥 USAMOS MOCKITO PURO PARA EVITAR LOS BUGS DE SPRING BOOT 🔥
+
 @ExtendWith(MockitoExtension.class)
 public class MascotaControllerTest {
 
-    private MockMvc mockMvc; // Nuestro "Postman" manual
+    private MockMvc mockMvc; 
 
-    private ObjectMapper objectMapper; // Para JSON
+    private ObjectMapper objectMapper; 
 
-    // ==========================================
-    // SIMULADORES CLÁSICOS (Sin depender de Spring)
-    // ==========================================
+    
     @Mock
     private IMascotaService mascotaService;
 
@@ -44,7 +42,7 @@ public class MascotaControllerTest {
     @Mock
     private JdbcTemplate jdbcTemplate;
 
-    // 🔥 ESTA ES LA MAGIA: Inyecta los simuladores directo al Controller
+
     @InjectMocks
     private MascotaController mascotaController;
 
@@ -52,7 +50,7 @@ public class MascotaControllerTest {
 
     @BeforeEach
     void setUp() {
-        // Inicializamos el Postman invisible apuntando solo a tu Controller
+      
         mockMvc = MockMvcBuilders.standaloneSetup(mascotaController).build();
         objectMapper = new ObjectMapper();
 
@@ -63,9 +61,7 @@ public class MascotaControllerTest {
         mascotaRocco.setEstadoReporte("REGISTRO NORMAL");
     }
 
-    // ==========================================
-    // PRUEBA 1: GET /api/mascotas/listar
-    // ==========================================
+
     @Test
     public void deberiaRetornarListaYStatus200() throws Exception {
         when(mascotaService.obtenerTodas()).thenReturn(Arrays.asList(mascotaRocco));
@@ -77,9 +73,7 @@ public class MascotaControllerTest {
                 .andExpect(jsonPath("$[0].id").value(37));
     }
 
-    // ==========================================
-    // PRUEBA 2: POST /api/mascotas/crear
-    // ==========================================
+
     @Test
     public void deberiaCrearMascotaYStatus200() throws Exception {
         when(mascotaService.guardar(any(Mascota.class))).thenReturn(mascotaRocco);
@@ -91,9 +85,7 @@ public class MascotaControllerTest {
                 .andExpect(jsonPath("$.nombre").value("Rocco"));
     }
 
-    // ==========================================
-    // PRUEBA 3: DELETE /api/mascotas/{id}
-    // ==========================================
+    
     @Test
     public void deberiaEliminarMascotaAdminYStatus200() throws Exception {
         when(jdbcTemplate.update(anyString(), any(Object.class))).thenReturn(1);
@@ -102,9 +94,7 @@ public class MascotaControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // ==========================================
-    // PRUEBA 4: DELETE FALLIDO
-    // ==========================================
+   
     @Test
     public void deberiaRetornarNotFoundAlEliminarAdmin() throws Exception {
         when(jdbcTemplate.update(anyString(), any(Object.class))).thenReturn(0);
