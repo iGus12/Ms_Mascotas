@@ -42,6 +42,11 @@ public class MascotaController {
         return ResponseEntity.ok(Service.obtenerPorDueño(id));
     }
 
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<List<Mascota>> porUsuario(@PathVariable Long id) {
+        return ResponseEntity.ok(Service.obtenerPorDueño(id));
+    }
+
     @PostMapping("/reportar")
     public ResponseEntity<Mascota> reportarMascota(
             @RequestBody Mascota mascota, 

@@ -16,5 +16,4 @@ java.util.List<Mascota> findByDueñoId(@Param("dueñoId") Long dueñoId);
     @Query(value = "SELECT COUNT(*) FROM mascotas WHERE estado_reporte= :estado", nativeQuery = true)
     long countByEstadoReal(@Param("estado") String estado);
 
-    
 }

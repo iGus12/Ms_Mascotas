@@ -10,4 +10,6 @@ public interface IMascotaService {
 
     long contarTodas();
     long contarPorEstado(String estado);
+    
+    java.util.List<Mascota> listarPorDueño(Long dueñoId);
 }

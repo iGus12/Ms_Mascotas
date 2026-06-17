@@ -38,4 +38,9 @@ public long contarPorEstado(String estado) {
     public List<Mascota> obtenerPorDueño(Long dueñoId) {
         return repositorio.findByDueñoId(dueñoId);
     }
+
+    @Override
+    public List<Mascota> listarPorDueño(Long dueñoId) {
+        return repositorio.findByDueñoId(dueñoId);
+    }
 }
